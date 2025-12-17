@@ -19,6 +19,8 @@ public class Main {
             System.out.println("2. Trier par âge");
             System.out.println("3. Afficher les 5 plus âgés");
             System.out.println("4. Supprimer les moins de 20 ans");
+            System.out.println("5. Afficher les moyennes");
+
             System.out.println("0. Quitter");
             System.out.print("Votre choix : ");
 
@@ -44,6 +46,16 @@ public class Main {
                     System.out.println("Suppression effectuée.");
                     break;
 
+
+                    case 5:
+    for (Etudiants e : etudiants) {
+        System.out.println(
+            e.getNom() + " " + e.getPrenom() +
+            " | Moyenne : " + e.calculmoy()
+        );
+    }
+    break;
+
                 case 0:
                     System.out.println("Fin du programme.");
                     break;
@@ -55,3 +67,4 @@ public class Main {
         } while (choix != 0);
     }
 }
+
