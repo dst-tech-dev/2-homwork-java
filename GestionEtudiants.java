@@ -1,16 +1,15 @@
 package POO;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class GestionEtudiants {
 
-    // ===== CRÉER DIRECTEMENT 50 ÉTUDIANTS =====
+    // ===== CRÉER N ÉTUDIANTS =====
     public static Etudiants[] saisirEtudiants(int n) {
-
         Etudiants[] tab = new Etudiants[n];
-
         for (int i = 0; i < n; i++) {
-
             double[] notes = {10 + i % 5, 12 + i % 4, 14 + i % 3};
-
             tab[i] = new Etudiants(
                 "Nom" + (i + 1),
                 "Prenom" + (i + 1),
@@ -18,7 +17,6 @@ public class GestionEtudiants {
                 notes
             );
         }
-
         return tab;
     }
 
@@ -29,85 +27,64 @@ public class GestionEtudiants {
         }
     }
 
-public static void afficherCinqPlusAges(Etudiants[] tab) {
-    trierParAge(tab); // tri croissant
-    System.out.println("\n--- 5 étudiants les plus âgés ---");
-    for (int i = tab.length - 1; i >= tab.length - 5; i--) {
-        tab[i].afficher();
+    // ===== TRI PAR AGE =====
+    public static void trierParAge(Etudiants[] tab) {
+        Arrays.sort(tab, Comparator.comparingInt(Etudiants::getAge));
     }
-}
 
+    // ===== AFFICHER 5 PLUS AGES =====
     public static void afficherCinqPlusAges(Etudiants[] tab) {
-    trierParAge(tab); // tri croissant
-    System.out.println("\n--- 5 étudiants les plus âgés ---");
-    for (int i = tab.length - 1; i >= tab.length - 5; i--) {
-        tab[i].afficher();
+        trierParAge(tab);
+        System.out.println("\n--- 5 étudiants les plus âgés ---");
+        for (int i = tab.length - 1; i >= Math.max(tab.length - 5, 0); i--) {
+            tab[i].afficher();
+        }
     }
-}
 
+    // ===== AFFICHER 5 MOINS AGES =====
     public static void afficherCinqMoinsAges(Etudiants[] tab) {
-    trierParAge(tab); // tri croissant
-    System.out.println("\n--- 5 étudiants les moins âgés ---");
-    for (int i = 0; i < 5; i++) {
-        tab[i].afficher();
-    }
-}
-
-public static double noteMaxTableau(Etudiants[] tab) {
-    double max = tab[0].noteMax();
-    for (Etudiants e : tab) {
-        if (e.noteMax() > max) {
-            max = e.noteMax();
+        trierParAge(tab);
+        System.out.println("\n--- 5 étudiants les moins âgés ---");
+        for (int i = 0; i < Math.min(5, tab.length); i++) {
+            tab[i].afficher();
         }
     }
-    return max;
-}
 
-    public static double noteMinTableau(Etudiants[] tab) {
-    double min = tab[0].noteMin();
-    for (Etudiants e : tab) {
-        if (e.noteMin() < min) {
-            min = e.noteMin();
-        }
-    }
-    return min;
-}
-
-    public static Etudiants[] supprimerMoinsAge(Etudiants[] tab, int ageMin) {
-    int cpt = 0;
-    for (Etudiants e : tab) {
-        if (e.getAge() >= ageMin) cpt++;
-    }
-
-    Etudiants[] nouveau = new Etudiants[cpt];
-    int index = 0;
-    for (Etudiants e : tab) {
-        if (e.getAge() >= ageMin) nouveau[index++] = e;
-    }
-
-    return nouveau;
-}
-
-    // ===== SUPPRIMER LES MOINS ÂGÉS (ex : < 20 ans) =====
-    public static Etudiants[] supprimerMoinsAge(Etudiants[] tab, int ageMin) {
-
-        int cpt = 0;
+    // ===== NOTE MAX DANS LE TABLEAU =====
+    public static double noteMaxTableau(Etudiants[] tab) {
+        double max = tab[0].noteMax();
         for (Etudiants e : tab) {
-            if (e.getAge() >= ageMin) {
-                cpt++;
-            }
+            if (e.noteMax() > max) max = e.noteMax();
         }
+        return max;
+    }
+
+    // ===== NOTE MIN DANS LE TABLEAU =====
+    public static double noteMinTableau(Etudiants[] tab) {
+        double min = tab[0].noteMin();
+        for (Etudiants e : tab) {
+            if (e.noteMin() < min) min = e.noteMin();
+        }
+        return min;
+    }
+
+    // ===== SUPPRIMER LES ETUDIANTS DE MOINS DE ageMin =====
+    public static Etudiants[] supprimerMoinsAge(Etudiants[] tab, int ageMin) {
+        int cpt = 0;
+        for (Etudiants e : tab) if (e.getAge() >= ageMin) cpt++;
 
         Etudiants[] nouveau = new Etudiants[cpt];
         int index = 0;
-
         for (Etudiants e : tab) {
-            if (e.getAge() >= ageMin) {
-                nouveau[index++] = e;
-            }
+            if (e.getAge() >= ageMin) nouveau[index++] = e;
         }
-
         return nouveau;
     }
-}
 
+    // ===== MOYENNE DES AGES =====
+    public static double moyenneAge(Etudiants[] tab) {
+        double somme = 0;
+        for (Etudiants e : tab) somme += e.getAge();
+        return somme / tab.length;
+    }
+}
