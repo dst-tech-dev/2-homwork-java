@@ -37,28 +37,29 @@ System.out.println("0. Quitter");
                     GestionEtudiants.trierParAge(etudiants);
                     System.out.println("Tri effectué.");
                     break;
-
-                case 3:
-                    GestionEtudiants.afficherCinqPlusAges(etudiants);
-                    break;
-
-                case 4:
-                    etudiants = GestionEtudiants.supprimerMoinsAge(etudiants, 20);
-                    System.out.println("Suppression effectuée.");
-                    break;
-
-
-                    case 5:
-    for (Etudiants e : etudiants) {
-        System.out.println(
-            e.getNom() + " " + e.getPrenom() +
-            " | Moyenne : " + e.calculmoy()
-        );
-    }
+case 3:
+    GestionEtudiants.afficherCinqPlusAges(etudiants);
+    break;
+case 4:
+    GestionEtudiants.afficherCinqMoinsAges(etudiants);
+    break;
+case 5:
+    System.out.println("Plus grande note : " + GestionEtudiants.noteMaxTableau(etudiants));
+    break;
+case 6:
+    System.out.println("Plus petite note : " + GestionEtudiants.noteMinTableau(etudiants));
+    break;
+case 7:
+    etudiants = GestionEtudiants.supprimerMoinsAge(etudiants, 20);
+    System.out.println("Suppression effectuée");
+    break;
+case 8:
+    System.out.println("Moyenne des âges : " + GestionEtudiants.moyenneAge(etudiants));
     break;
 
+
                 case 0:
-                    System.out.println("Fin du programme.");
+                    System.out.println("quitter.");
                     break;
 
                 default:
@@ -68,5 +69,6 @@ System.out.println("0. Quitter");
         } while (choix != 0);
     }
 }
+
 
 
