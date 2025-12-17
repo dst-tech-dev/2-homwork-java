@@ -14,15 +14,16 @@ public class Main {
         int choix;
 
         do {
-            System.out.println("\n===== MENU =====");
-            System.out.println("1. Afficher tous les étudiants");
-            System.out.println("2. Trier par âge");
-            System.out.println("3. Afficher les 5 plus âgés");
-            System.out.println("4. Supprimer les moins de 20 ans");
-            System.out.println("5. Afficher les moyennes");
+           System.out.println("1. Afficher tous les étudiants");
+System.out.println("2. Trier par âge");
+System.out.println("3. Afficher 5 plus âgés");
+System.out.println("4. Afficher 5 moins âgés");
+System.out.println("5. Plus grande note");
+System.out.println("6. Plus petite note");
+System.out.println("7. Supprimer les étudiants de moins de 20 ans");
+System.out.println("8. Moyenne des âges");
+System.out.println("0. Quitter");
 
-            System.out.println("0. Quitter");
-            System.out.print("Votre choix : ");
 
             choix = sc.nextInt();
 
@@ -67,4 +68,5 @@ public class Main {
         } while (choix != 0);
     }
 }
+
 
